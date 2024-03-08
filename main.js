@@ -10,18 +10,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const perfil = 'MvthLeao'
 
-    fetch(`https://api.github.com/users/${perfil}`)
-    .then(function(res) {
-        return res.json();
-    })
+    try {
+        fetch(`https://api.github.com/users/${perfil}`)
+        .then(function(res) {
+            return res.json();
+        })
 
-    .then(function(json) {
-        nome.innerText = json.name;
-        username.innerText = json.login;
-        avatar.src = json.avatar_url;
-        repos.innerText = json.public_repos;
-        followers.innerText = json.followers;
-        following.innerText = json.following;
-        link.innerText = json.html_url;
-    })
-})
+        .then(function(json) {
+            nome.innerText = json.name;
+            username.innerText = json.login;
+            avatar.src = json.avatar_url;
+            repos.innerText = json.public_repos;
+            followers.innerText = json.followers;
+            following.innerText = json.following;
+            link.innerText = json.html_url;
+        })
+        
+        .catch(function(error) {
+            console.log('Por favor, tente novamente mais tarde. ', error);
+        });
+
+    } catch(error) {
+        console.log('Ocorreu um erro na requisição', error);
+    }
+});
